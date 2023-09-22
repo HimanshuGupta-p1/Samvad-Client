@@ -1,6 +1,7 @@
 import {createContext, useCallback, useEffect, useState} from 'react'
 import {io} from "socket.io-client"
 import {baseUrl, postRequest, getRequest} from '../utils/services'
+import { Navigate } from 'react-router-dom';
 
 export const ChatContext = createContext();
 
@@ -172,7 +173,7 @@ export const ChatContextProvider = ({children, user}) => {
         if (response.error) {
             return console.log("Error creating chat", response);
         }
-
+        // Navigate('/')
         setUserChats((prev) => [...prev, response]);
 
     }, []);

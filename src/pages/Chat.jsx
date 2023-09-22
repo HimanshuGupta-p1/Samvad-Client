@@ -17,7 +17,7 @@ const Chat = () => {
     <>
       <Container className='home'>
         {/* <PotentialChats/> */}
-        {userChats?.length < 1 ? null: 
+        { 
         <Stack direction = "horizontal" gap={4} 
         className = "align-items-start" >
           <Stack className = "messages-box flex-grow-0 " gap={3}>

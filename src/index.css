@@ -236,3 +236,11 @@ body::-webkit-scrollbar{
   align-items: center;
   justify-content: center;
 }
+
+/* Search User */
+
+.search {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}

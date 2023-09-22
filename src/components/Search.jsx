@@ -2,6 +2,7 @@ import { Button, Col, Container, Form, Row, Stack } from "react-bootstrap";
 import { useEffect, useState, useContext } from "react";
 import { ChatContext } from "../context/ChatContext";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 var colors = ['#00B3E6',
   '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
@@ -22,7 +23,12 @@ export default function SearchBar() {
 
   useEffect(() => {
     console.log(searchUser)
-  }, [searchUser])
+  }, [searchUser]);
+
+  const redirectToChat = (user1, user2) => {
+    createChat(user1, user2);
+  }
+
   return (
     <Container className="p-2 home h-100">
           <Form className="d-flex">
@@ -39,11 +45,14 @@ export default function SearchBar() {
           {potentialChats && potentialChats.map((u, index) => {
           const bgColor = colors[(Math.floor(Math.random() * colors.length))]
           return (
-            <div className="single-user" key={index} onClick={() => createChat(user?._id, u._id)} style={{ backgroundColor: bgColor }}>
+            <Link className="single-user" key={index} 
+            onClick={() => redirectToChat(user?._id, u._id)} 
+            style={{ backgroundColor: bgColor }}
+            to='/'>
               {u.name}
               <span className={onlineUsers?.some((user) => user?.userId == u?._id) ?
                 "user-online" : ""} style={{ position: "absolute" }}></span>
-            </div>
+            </Link>
           );
         })}
           </Stack>

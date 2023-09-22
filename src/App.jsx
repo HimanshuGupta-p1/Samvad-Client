@@ -21,7 +21,6 @@ function App() {
         <Route path='/' element = {user? <Chat/>: <Login/>} />
         <Route path='/register' element = {user? <Chat/>: <Register/>} />
         <Route path='/login' element = {user? <Chat/> : <Login/>} />
-        <Route path='/search' element = {user? <PotentialChats/>: <Login/> } />
         <Route path='*' element = {<Navigate to = "/"/>} />
       </Routes>
     </Container>

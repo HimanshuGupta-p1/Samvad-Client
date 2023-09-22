@@ -5,6 +5,7 @@ import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
 import { Stack } from "react-bootstrap";
 import moment from 'moment';
 import InputEmoji from 'react-input-emoji'
+import { PotentialChats } from "./potentialChats";
 
 export const ChatBox = () => {
     const { user } = useContext(AuthContext);
@@ -20,9 +21,12 @@ export const ChatBox = () => {
     }, [messages]);
 
     if (!recipientUser) return (
+        <>
         <p style={{ textAlign: "center", width: "100%" , color: "rgb(241, 239, 239)"}}>
             No Conversation Selected yet...
         </p>
+        <PotentialChats/>
+        </>
     )
     return (
         <Stack gap={4} className="chat-box">
