@@ -9,27 +9,24 @@ import { PotentialChats } from "./potentialChats";
 
 export const ChatBox = () => {
     const { user } = useContext(AuthContext);
-    const { currentChat, messages, IsMessagesLoading, sendTextMessage } = useContext(ChatContext);
-    const { recipientUser } = useFetchRecipientUser(currentChat, user);
+    const { currentChat, messages,sendTextMessage, updateCurrentChat} = useContext(ChatContext);
+    let { recipientUser } = useFetchRecipientUser(currentChat, user);
     const [textMessage, setTextMessage] = useState('');
     const scroll = useRef();
 
+    const closeChat = () => {
+        updateCurrentChat(null);
+        recipientUser = null;
+    }
     // console.log(textMessage);
+
 
     useEffect(() => {
         scroll.current?.scrollIntoView({behaviour: "smooth"})
     }, [messages]);
 
-    if (!recipientUser) return (
-        <>
-        <p style={{ textAlign: "center", width: "100%" , color: "rgb(241, 239, 239)"}}>
-            No Conversation Selected yet...
-        </p>
-        <PotentialChats/>
-        </>
-    )
     return (
-        <Stack gap={4} className="chat-box">
+            <Stack gap={4} className="chat-box">
             <div className="chat-header">
                 <strong>{recipientUser?.name}</strong>
             </div>
@@ -46,7 +43,11 @@ export const ChatBox = () => {
                             <span className="message-footer">{moment(message.createdAt).calendar()}</span>
                         </Stack>))}
             </Stack>
+            
             <Stack direction="horizontal" gap={3} className="chat-input flex-grow-0">
+            <svg xmlns="http://www.w3.org/2000/svg" style={{cursor:"pointer"}} onClick={() => closeChat()} x="0px" y="0px" width="30" height="30" viewBox="0 0 512 512">
+<path fill="#E04F5F" d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z"></path><path fill="#FFF" d="M285,256l72.5-84.2c7.9-9.2,6.9-23-2.3-31c-9.2-7.9-23-6.9-30.9,2.3L256,222.4l-68.2-79.2c-7.9-9.2-21.8-10.2-31-2.3c-9.2,7.9-10.2,21.8-2.3,31L227,256l-72.5,84.2c-7.9,9.2-6.9,23,2.3,31c4.1,3.6,9.2,5.3,14.3,5.3c6.2,0,12.3-2.6,16.6-7.6l68.2-79.2l68.2,79.2c4.3,5,10.5,7.6,16.6,7.6c5.1,0,10.2-1.7,14.3-5.3c9.2-7.9,10.2-21.8,2.3-31L285,256z"></path>
+</svg>
                 <InputEmoji value={textMessage}
                     onChange={setTextMessage}
                     fontFamily="nunito"
@@ -58,5 +59,6 @@ export const ChatBox = () => {
                 </button>
             </Stack>
         </Stack>
+        
     )
 }

@@ -3,21 +3,19 @@ import { ChatContext } from '../context/ChatContext'
 import { Container, Stack } from 'react-bootstrap';
 import UserChat from '../components/chat/UserChat';
 import { AuthContext } from '../context/AuthContext';
-import { PotentialChats } from '../components/chat/potentialChats';
 import { ChatBox } from '../components/chat/ChatBox';
-import SearchBar from '../components/Search';
+import { PotentialChats } from '../components/chat/potentialChats';
 
 const Chat = () => {
   const {user} = useContext(AuthContext);
   const {userChats,
+    currentChat,
     isUserChatsLoading,
     updateCurrentChat} = useContext(ChatContext);
     // console.log("User Chats", userChats);
   return (
     <>
       <Container className='home'>
-        {/* <PotentialChats/> */}
-        { 
         <Stack direction = "horizontal" gap={4} 
         className = "align-items-start" >
           <Stack className = "messages-box flex-grow-0 " gap={3}>
@@ -31,8 +29,17 @@ const Chat = () => {
               )
             })}
           </Stack>
-          <ChatBox/>
-          </Stack>}
+          {
+            currentChat? <ChatBox/>:
+            <>
+            <p style={{ textAlign: "center", width: "100%" , color: "rgb(241, 239, 239)"}}>
+                Click on Conversation to Chat...
+            </p>
+            <PotentialChats/>
+            </>
+          }
+          
+          </Stack>
       </Container>
     </>
   )

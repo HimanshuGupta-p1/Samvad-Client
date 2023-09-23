@@ -24,6 +24,9 @@ export const PotentialChats = () => {
   return (
     <>
       <Container className="p-2 search">
+      <div className="text-light ">
+              Search User to Chat with them.
+            </div>
           <Form className="d-flex w-50 justify-content-md-center">
             <Form.Control
               type="search"
@@ -34,7 +37,7 @@ export const PotentialChats = () => {
               onChange={(e) => {setSearchUser(e.target.value)}}
             />
           </Form>
-          <Stack className="w-25">
+          <Stack className="w-50">
           {potentialChats1 && potentialChats1.map((u, index) => {
           return (
             <div className="single-user text-light messages-box text-center" key={index} onClick={() => createChat(user?._id, u._id)}>

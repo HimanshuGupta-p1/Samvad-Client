@@ -22,7 +22,7 @@ export const NavBar = () => {
             {
               user && (<>
               <Notification/>
-              <Avatar backgroundColor='#009dff' px="10px" py="5px" borderRadius="50%" color="white">
+              <Avatar px="10px" py="5px" borderRadius="50%" color="white" border="solid white 2px">
         <span className='text-light'>{user?.name.charAt(0).toUpperCase()} </span>
         </Avatar>
                 <Link onClick={() => logoutUser()} to="/login"
