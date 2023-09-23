@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { useFetchRecipientUser } from '../../hooks/useFetchRecipient'
-import avatar from '../../assets/avatar.svg'
 import { Stack } from 'react-bootstrap';
 import { ChatContext } from '../../context/ChatContext';
 import { unreadNotificationsFunc } from '../../utils/unreadNotifications';
