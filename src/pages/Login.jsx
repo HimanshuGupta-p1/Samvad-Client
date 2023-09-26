@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import {Alert, Button, Form, Row, Col, Stack} from 'react-bootstrap'
 import { AuthContext } from '../context/AuthContext';
 const Login = () => {
@@ -8,8 +8,20 @@ const Login = () => {
         loginInfo,
         updateLoginInfo,
         isLoginLoading } = useContext(AuthContext);
+    const [isAlert, setIsAlert] = useState(true);
+    const updateAlert = () => {
+        setInterval(() => {
+            setIsAlert(false);
+            console.log('a')
+        }, 10000)
+    }
   return (
     <>
+    {
+
+        isAlert && <Alert onClick={updateAlert}>Wait for 2 minutes to connect with the server...
+        <br/> Click on this alert to hide!!!</Alert> 
+    }
     <Form onSubmit={loginUser}  className='home'>
         <Row style={{
             height: "100vh",
